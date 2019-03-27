@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.xaau.entity.Survey_name" table="Survey_name">
+        <id name="surveyID" type="int">
+            <column name="surveyID" />
+            <!-- 采用数据库提供的主键生成机制。如DB2、SQL Server、MySQL 中的主键生成机制 -->
+            <generator class="identity">
+            </generator>
+        </id>
+        <property name="title" type="java.lang.String">
+            <column name="title" />
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="description" />
+        </property>
+        <property name="create_time" type="java.lang.String">
+            <column name="create_time"/>
+        </property>
+    </class>
+</hibernate-mapping>
