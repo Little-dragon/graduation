@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PageUtil {
 	public static  HashMap<String , String> handle(String src){

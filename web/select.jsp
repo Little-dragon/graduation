@@ -67,7 +67,7 @@
                 top: '40%',
                 left: 'center',
                 style: {
-                    text: '高中生学习情况调查',
+                    text: '${backstage.title}',
                     fill: '#333333',
                     fontSize: 20,
                     fontWeight: 'normal'
@@ -77,7 +77,7 @@
                 top: '53%',
                 left: 'center',
                 style: {
-                    text: '已投票人数 ${backstage.member_nums} 人',
+                    text: '创建于${backstage.create_time}',
                     fill: '#A6A8B6',
                     fontSize: 12,
                     fontWeight: 'normal'

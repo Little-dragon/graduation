@@ -30,7 +30,10 @@ public class ManageAction implements ServletRequestAware {
     }
 
     public String edit(){
-        backstage = naireService.findById(Integer.parseInt(request.getParameter("surveyID")));
+        String surveyID = request.getParameter("surveyID");
+        System.out.println(surveyID);
+        if(surveyID != null)
+            backstage = naireService.findById(Integer.parseInt(request.getParameter("surveyID")));
         return "edit";
     }
 

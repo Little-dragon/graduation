@@ -18,5 +18,8 @@
         <property name="create_time" type="java.lang.String">
             <column name="create_time"/>
         </property>
+        <property name="image_name" type="java.lang.String">
+            <column name="image_name"/>
+        </property>
     </class>
 </hibernate-mapping>

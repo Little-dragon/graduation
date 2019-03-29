@@ -16,32 +16,77 @@
           crossorigin="anonymous"-->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<title>汽车调查问卷后台管理系统</title>
+	<style>
+		body{
+			text-align: center;
+		}
+		.row img{
+			height: 150px;
+			width: 100px;
+			margin-top: 10px;
+		}
+
+		.row .img-wrap{
+			display: block;
+			margin: 0 auto;
+			width: 150px;
+			height: 160px;
+			background: #DDE5ED;
+		}
+
+		.row .content-wrap{
+			width: 150px;
+			margin: 0 auto;
+			background-color: #fff;
+			box-sizing: border-box;
+			border: 1px solid #eaeaea;
+		}
+
+		.row .content-wrap h4{
+			display: block;
+		}
+
+		.col-xs-6 , .col-md-4{
+			height: 222px;
+			margin-bottom: 10px;
+		}
+
+		#add button{
+			margin: 0;
+			padding: 0;
+			width: 150px;
+			height: 150px
+		}
+
+		#add{
+			margin: 0 auto;
+		}
+	</style>
 </head>
 <body>
 <jsp:include page="head.jsp"/>
 
 <div class=".container" style="margin: 0 auto; width: 80%">
-	<table class="table table-bordered">
-		<thead>
-		<tr>
-			<td>问卷名称</td>
-			<td>问卷描述</td>
-			<td>问卷创建时间</td>
-			<td>问卷操作</td>
-		</tr>
-		</thead>
-		<tbody>
-			<s:iterator value="backstages" var="backstage">
-				<tr>
-					<th scope="row">${backstage.title}</th>
-					<td>${backstage.description}</td>
-					<td>${backstage.create_time}</td>
-					<td><a href="${pageContext.request.contextPath}/edit?surveyID=${backstage.surveyID}" >编辑问卷</a>&nbsp&nbsp<a href="${pageContext.request.contextPath}/select?surveyID=${backstage.surveyID}">查看结果</a>&nbsp&nbsp<a href="${pageContext.request.contextPath}/delete?surveyID=${backstage.surveyID}">删除问卷</a></td>
-				</tr>
-			</s:iterator>
-		</tbody>
-	</table>
-
+	<div class="row">
+		<s:iterator value="backstages" var="backstage">
+			<div class="col-xs-6 col-md-4">
+				<div class="img-wrap" onclick="window.open('${pageContext.request.contextPath}/select?surveyID=${backstage.surveyID}','_self')">
+					<img class="img-rounded" src="images/${backstage.image_name}">
+				</div>
+				<div class="content-wrap">
+					<h5>${backstage.title}</h5>
+					<h6>已有${backstage.member_nums}人参加此问卷</h6>
+				</div>
+			</div>
+		</s:iterator>
+		<div class="col-xs-6 col-md-4">
+			<div id="add">
+				<button type="button" class="btn btn-default btn-lg" onclick="location.href='${pageContext.request.contextPath}/edit'">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加问卷
+				</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 <!-- Optional JavaScript -->

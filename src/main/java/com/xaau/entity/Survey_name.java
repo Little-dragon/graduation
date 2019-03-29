@@ -11,6 +11,8 @@ public class Survey_name {
     private String description;
     //问卷创建时间
     private String create_time;
+    //问卷对应图片的名称
+    private String image_name;
 
     public int getSurveyID() {
         return surveyID;
@@ -42,5 +44,13 @@ public class Survey_name {
 
     public void setCreate_time(String create_time) {
         this.create_time = create_time;
+    }
+
+    public String getImage_name() {
+        return image_name;
+    }
+
+    public void setImage_name(String image_name) {
+        this.image_name = image_name;
     }
 }
