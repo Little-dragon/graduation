@@ -53,6 +53,9 @@ public class MyTest {
 
     @Test
     public void My1(){
+        String a = "abc";
+        a = "efg";
+        System.out.println("efg" == "abc");
 //        Session session=null;
 //        Backstage backstage = null;
 //        Survey_name survey_name = null;

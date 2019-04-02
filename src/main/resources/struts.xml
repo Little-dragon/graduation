@@ -3,7 +3,6 @@
         "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-    <!--constant name="struts.i18n.encoding" value="UTF-8"/ -->
     <constant name="struts.objectFactory" value="spring" />
     <package name="base" extends="struts-default,json-default">
         <action name="index" class="indexAction" method="index">
@@ -25,5 +24,15 @@
         <action name="delete" class="manageAction" method="delete">
             <result name="delete" type="redirectAction">manage</result>
         </action>
+
+        <action name="add" class="manageAction" method="add">
+            <result name="add">add.jsp</result>
+        </action>
+
+        <action name="resolve" class="manageAction" method="resolve">
+            <interceptor-ref name="json"/>
+            <result name="resolve">manage.jsp</result>
+        </action>
+
     </package>
 </struts>

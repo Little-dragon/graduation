@@ -81,7 +81,7 @@
 		</s:iterator>
 		<div class="col-xs-6 col-md-4">
 			<div id="add">
-				<button type="button" class="btn btn-default btn-lg" onclick="location.href='${pageContext.request.contextPath}/edit'">
+				<button type="button" class="btn btn-default btn-lg" onclick="location.href='${pageContext.request.contextPath}/add'">
 					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加问卷
 				</button>
 			</div>
