@@ -31,7 +31,7 @@
 
         <action name="resolve" class="manageAction" method="resolve">
             <interceptor-ref name="json"/>
-            <result name="resolve">manage.jsp</result>
+            <result name="resolve" type="dispatcher">/manage.jsp</result>
         </action>
 
     </package>

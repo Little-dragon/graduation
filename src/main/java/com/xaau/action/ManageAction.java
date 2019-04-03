@@ -2,17 +2,14 @@ package com.xaau.action;
 
 import com.xaau.entity.Backstage;
 import com.xaau.service.NaireService;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class ManageAction implements ServletRequestAware {
@@ -23,7 +20,7 @@ public class ManageAction implements ServletRequestAware {
     private HttpServletRequest request;
     private Backstage backstage;
     private List<Backstage> backstages;
-    private String content;
+    private HashMap<String , String> content;
 
     public String select(){
         backstage = naireService.findById(Integer.parseInt(request.getParameter("surveyID")));
@@ -47,26 +44,16 @@ public class ManageAction implements ServletRequestAware {
         return "add";
     }
 
-    public String resolve() throws IOException {
-        String mpsStr = getRequestPostData(request);
-        System.out.println(mpsStr);
-        JSONObject mpsObject = JSONObject.fromObject(mpsStr);
-        // 通过key获取value
-        String jsonString = mpsObject.getString("content");
-        System.out.println(jsonString);
-        JSONArray contentArray = JSONArray.fromObject(content);
-//        List<String> list = (List<String>) JSONArray.toCollection(contentArray);
-//        for (int i = 0;i < list.size();i++){
-//            System.out.println(list.get(i));
-//        }
+    public String resolve(){
+        System.out.println(JSONObject.fromObject(content));
         return "resolve";
     }
 
-    public String getContent() {
+    public HashMap<String, String> getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(HashMap<String, String> content) {
         this.content = content;
     }
 
@@ -89,22 +76,6 @@ public class ManageAction implements ServletRequestAware {
 
     public void setBackstages(List<Backstage> backstages) {
         this.backstages = backstages;
-    }
-
-    private String getRequestPostData(HttpServletRequest request) throws IOException {
-        int contentLength = request.getContentLength();
-        if(contentLength<0){
-            return null;
-        }
-        byte buffer[] = new byte[contentLength];
-        for (int i = 0; i < contentLength;) {
-            int len = request.getInputStream().read(buffer, i, contentLength - i);
-            if (len == -1) {
-                break;
-            }
-            i += len;
-        }
-        return new String(buffer, "utf-8");
     }
 
 }
