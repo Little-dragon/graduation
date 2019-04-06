@@ -1,5 +1,7 @@
 package com.xaau.utils;
 
+import org.junit.Test;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
@@ -33,9 +35,22 @@ public class PageUtil {
 		   return Integer.parseInt(sb.toString());
 		}
 
-	public static String format_time(String time){
-
-		String result = "";
-		return result;
+	@Test
+	public void format_String(){
+		HashMap<String , String> result = new HashMap<String , String>();
+		String src = "cab=b*#b*#, ca=b*#b*#b*#b";
+		String type = "";
+		String question_name = "";
+		String[] list = src.split(",");
+		for(int i = 0;i < list.length;i++){
+			type = list[i].trim().substring(0,1);
+			String[] temp = list[i].trim().split("=");
+			question_name = temp[0].substring(1 , temp[0].length());
+			String[] answers = temp[1].split("\\*#");
+			for(int j = 0;j < answers.length;j++){
+				System.out.println(answers[j]);
+			}
+		}
+//		return result;
 	}
 }

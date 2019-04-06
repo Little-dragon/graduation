@@ -5,7 +5,7 @@ import com.xaau.entity.Survey_name;
 import java.util.List;
 
 public interface NaireService {
-    public void add(Survey_name survey_name);
+    public void add(String survey);
     public void update(Survey_name survey_name);
     public void delete(int surveyID);
     public Survey_name findByName(String keyword);

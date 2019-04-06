@@ -30,7 +30,6 @@ public class MyTest {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYYMMdd");
             Survey_name survey_name = new Survey_name();
             survey_name.setTitle("汽车使用情况调查");
-            survey_name.setDescription("第二篇问卷调查");
             survey_name.setCreate_time(simpleDateFormat.format(new Date()));
             session.save(survey_name);
             tx.commit();
@@ -47,35 +46,74 @@ public class MyTest {
             if(session != null)
                 session.close();
         }
-
-
     }
 
     @Test
     public void My1(){
-        String a = "abc";
-        a = "efg";
-        System.out.println("efg" == "abc");
-//        Session session=null;
-//        Backstage backstage = null;
-//        Survey_name survey_name = null;
-//        try {
-//            session = sessionFactory.openSession();
-//            Transaction tx = session.beginTransaction();
-//            String sql = "select DISTINCT(Survey_name.title) , Survey_name.description , Survey_name.create_time from Survey_name ,Survey_answer WHERE Survey_name.surveyID = ?";
-//            Query query = session.createSQLQuery(sql);
-//            query.setResultTransformer(Transformers.aliasToBean(Backstage.class));
-//            query.setParameter(0 , 5);
-//            backstage = (Backstage)query.uniqueResult();
-//            sql = "select sum(poll) as member_nums from Survey_answer a LEFT JOIN Survey_data b ON a.questionID = b.questionID ";
-//            query = session.createSQLQuery(sql);
-//            backstage.setMember_nums(Integer.parseInt(query.uniqueResult().toString()));
-//            System.out.println(backstage);
-//            tx.commit();
-//        } catch (HibernateException e) {
-//            e.printStackTrace();
-//        }finally{
-//            session.close();
-//        }
+        Session session = null;
+        try {
+            String survey = "cab=b*#b*#, ca=b*#b*#b*#b*#";
+            session = sessionFactory.openSession();
+            Transaction tx = session.beginTransaction();
+            String answerType = "";
+            String question_name = "你好吗";
+            Date date = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+
+            //survey_name
+            String sql = "Insert into Survey_name(title, create_time, image_name) values(? , ? , '3ac79f3df8dcd1001531c4cc798b4710b8122fa9.jpg')";
+            Query query = session.createSQLQuery(sql);
+            query.setParameter(0 , question_name);
+            query.setParameter(1 , simpleDateFormat.format(date));
+            query.executeUpdate();
+            tx.commit();
+
+            tx = session.beginTransaction();
+            //surveyID
+            sql = "select max(surveyID) from Survey_name";
+            query = session.createSQLQuery(sql);
+            int surveyID = Integer.parseInt(query.uniqueResult().toString());
+            int questionID = 0;
+            tx.commit();
+
+            String[] list = survey.split(",");
+            for(int i = 0;i < list.length;i++){
+                tx = session.beginTransaction();
+                //questionID
+                sql = "select max(questionID) from Survey_data";
+                query = session.createQuery(sql);
+                questionID = Integer.parseInt(query.uniqueResult().toString()) + 1;
+
+                sql = "insert into Survey_data(questionID , question , answerType , surveyID) values(?,?,?,?)";
+                answerType = list[i].trim().substring(0,1);
+                String[] temp = list[0].trim().split("=");
+                question_name = temp[0].substring(1 , temp[0].length());
+                query = session.createSQLQuery(sql);
+                query.setParameter(0 , questionID);
+                query.setParameter(1 , question_name);
+                query.setParameter(2 , answerType);
+                query.setParameter(3 , surveyID);
+                query.executeUpdate();
+                tx.commit();
+                System.out.println(temp[1]);
+                String[] answers = temp[1].split("\\*#");
+                for(int j = 0;j < answers.length;j++){
+                    tx = session.beginTransaction();
+                    sql = "insert into Survey_answer(questionID , choiceText , poll) values(?,?,0)";
+                    answerType = list[i].trim().substring(0,1);
+
+                    query = session.createSQLQuery(sql);
+                    query.setParameter(0 , questionID);
+                    System.out.println(answers[j]);
+                    query.setParameter(1 , answers[j]);
+                    query.executeUpdate();
+                    tx.commit();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
     }
 }

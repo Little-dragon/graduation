@@ -16,9 +16,8 @@ public class NaireServiceImpl implements NaireService {
     private NaireDao naireDao;
 
     @Override
-    public void add(Survey_name survey_name) {
-        if(naireDao.findById(survey_name.getSurveyID())==null)
-            naireDao.add(survey_name);
+    public void add(String survey) {
+        naireDao.add(survey);
     }
 
     @Override

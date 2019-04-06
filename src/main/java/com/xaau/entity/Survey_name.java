@@ -7,8 +7,6 @@ public class Survey_name {
     private int surveyID;
     //问卷名称
     private String title;
-    //问卷简单描述
-    private String description;
     //问卷创建时间
     private String create_time;
     //问卷对应图片的名称
@@ -28,14 +26,6 @@ public class Survey_name {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getCreate_time() {

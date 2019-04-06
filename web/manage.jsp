@@ -20,6 +20,7 @@
 		body{
 			text-align: center;
 		}
+
 		.row img{
 			height: 150px;
 			width: 100px;
@@ -65,12 +66,13 @@
 </head>
 <body>
 <jsp:include page="head.jsp"/>
+<%--<iframe src="head.jsp" width="100%"></iframe>--%>
 
 <div class=".container" style="margin: 0 auto; width: 80%">
 	<div class="row">
 		<s:iterator value="backstages" var="backstage">
 			<div class="col-xs-6 col-md-4">
-				<div class="img-wrap" onclick="window.open('${pageContext.request.contextPath}/select?surveyID=${backstage.surveyID}','_self')">
+				<div class="img-wrap" onclick="location.href='${pageContext.request.contextPath}/select?surveyID=${backstage.surveyID}'">
 					<img class="img-rounded" src="images/${backstage.image_name}">
 				</div>
 				<div class="content-wrap">
@@ -99,10 +101,6 @@
 		src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
-<!--script
-        src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>

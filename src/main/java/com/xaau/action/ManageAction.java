@@ -2,6 +2,7 @@ package com.xaau.action;
 
 import com.xaau.entity.Backstage;
 import com.xaau.service.NaireService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.stereotype.Component;
@@ -16,10 +17,8 @@ public class ManageAction implements ServletRequestAware {
 
     @Resource
     private NaireService naireService;
-
     private HttpServletRequest request;
     private Backstage backstage;
-    private List<Backstage> backstages;
     private HashMap<String , String> content;
 
     public String select(){
@@ -45,7 +44,10 @@ public class ManageAction implements ServletRequestAware {
     }
 
     public String resolve(){
-        System.out.println(JSONObject.fromObject(content));
+        JSONArray jsonArray = JSONArray.fromObject(content);
+        JSONObject job = jsonArray.getJSONObject(0);
+        String result = job.entrySet().toString();
+        naireService.add(result.substring(1, result.length() - 1));
         return "resolve";
     }
 
@@ -69,13 +71,4 @@ public class ManageAction implements ServletRequestAware {
     public void setBackstage(Backstage backstage) {
         this.backstage = backstage;
     }
-
-    public List<Backstage> getBackstages() {
-        return backstages;
-    }
-
-    public void setBackstages(List<Backstage> backstages) {
-        this.backstages = backstages;
-    }
-
 }
